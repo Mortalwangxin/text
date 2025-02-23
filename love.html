@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f9f9f9;
+            background-color: #ffcccb; /* 粉红色背景 */
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,6 +16,7 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            overflow: hidden; /* 防止滚动条 */
         }
         h1 {
             color: #ff6b6b;
@@ -32,6 +33,7 @@
         .buttons {
             display: flex;
             gap: 20px;
+            position: relative;
         }
         button {
             padding: 15px 30px;
@@ -44,6 +46,7 @@
         #agree {
             background-color: #4caf50;
             color: white;
+            transition: all 0.5s ease; /* 平滑放大效果 */
         }
         #disagree {
             background-color: #f44336;
@@ -89,6 +92,8 @@
             'https://pic1.imgdb.cn/item/67baf5cfd0e0a243d4029096.gif'
         ]; // 不同意时的图片
 
+        let agreeButtonScale = 1; // 记录“同意”按钮的放大倍数
+
         // 同意按钮点击事件
         agreeButton.addEventListener('click', () => {
             imageElement.src = agreeImage;
@@ -96,10 +101,6 @@
             setTimeout(() => {
                 imageElement.style.opacity = 1;
             }, 100);
-            agreeButton.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                agreeButton.style.transform = 'scale(1)';
-            }, 200);
             successMessage.classList.remove('hidden');
             failMessage.classList.add('hidden');
         });
@@ -112,12 +113,23 @@
             setTimeout(() => {
                 imageElement.style.opacity = 1;
             }, 100);
-            disagreeButton.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                disagreeButton.style.transform = 'scale(1)';
-            }, 200);
             failMessage.classList.remove('hidden');
             successMessage.classList.add('hidden');
+
+            // 逐渐放大“同意”按钮
+            agreeButtonScale += 0.2; // 每次点击放大 20%
+            agreeButton.style.transform = `scale(${agreeButtonScale})`;
+            agreeButton.style.width = `${agreeButton.offsetWidth * 1.2}px`;
+            agreeButton.style.height = `${agreeButton.offsetHeight * 1.2}px`;
+
+            // 如果“同意”按钮占满屏幕，停止放大
+            if (agreeButtonScale >= 5) {
+                agreeButton.style.width = '100%';
+                agreeButton.style.height = '100%';
+                agreeButton.style.borderRadius = '0';
+                agreeButton.style.fontSize = '3rem';
+                agreeButton.textContent = '❤️ 你终于同意了！ ❤️';
+            }
         });
     </script>
 </body>
