@@ -128,12 +128,12 @@
 
             // 限制“同意”按钮的最大尺寸
             const maxWidth = buttonsContainer.offsetWidth * 0.8; // 最大宽度为按钮容器宽度的 80%
-            const maxHeight = buttonsContainer.offsetHeight * 0.8; // 最大高度为按钮容器高度的 80%
+            const maxHeight = buttonsContainer.offsetHeight * 0.9; // 最大高度为按钮容器高度的 80%
             if (agreeButton.offsetWidth >= maxWidth || agreeButton.offsetHeight >= maxHeight) {
                 agreeButton.style.width = `${maxWidth}px`;
                 agreeButton.style.height = `${maxHeight}px`;
                 agreeButton.style.fontSize = '2rem';
-                agreeButton.textContent = '❤️ 你终于同意了！ ❤️';
+                agreeButton.textContent = '❤️ 同意 ❤️';
             }
         });
     </script>
