@@ -103,6 +103,9 @@
             }, 100);
             successMessage.classList.remove('hidden');
             failMessage.classList.add('hidden');
+
+            // 隐藏“同意”按钮
+            agreeButton.style.display = 'none';
         });
 
         // 不同意按钮点击事件
@@ -119,15 +122,14 @@
             // 逐渐放大“同意”按钮
             agreeButtonScale += 0.2; // 每次点击放大 20%
             agreeButton.style.transform = `scale(${agreeButtonScale})`;
-            agreeButton.style.width = `${agreeButton.offsetWidth * 1.2}px`;
-            agreeButton.style.height = `${agreeButton.offsetHeight * 1.2}px`;
 
-            // 如果“同意”按钮占满屏幕，停止放大
-            if (agreeButtonScale >= 5) {
-                agreeButton.style.width = '100%';
-                agreeButton.style.height = '100%';
-                agreeButton.style.borderRadius = '0';
-                agreeButton.style.fontSize = '3rem';
+            // 限制“同意”按钮的最大尺寸
+            const maxWidth = window.innerWidth * 0.8; // 最大宽度为屏幕宽度的 80%
+            const maxHeight = window.innerHeight * 0.8; // 最大高度为屏幕高度的 80%
+            if (agreeButton.offsetWidth >= maxWidth || agreeButton.offsetHeight >= maxHeight) {
+                agreeButton.style.width = `${maxWidth}px`;
+                agreeButton.style.height = `${maxHeight}px`;
+                agreeButton.style.fontSize = '2rem';
                 agreeButton.textContent = '❤️ 你终于同意了！ ❤️';
             }
         });
