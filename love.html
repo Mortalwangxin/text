@@ -34,6 +34,7 @@
             display: flex;
             gap: 20px;
             position: relative;
+            margin-top: 20px; /* 与图片保持距离 */
         }
         button {
             padding: 15px 30px;
@@ -78,6 +79,7 @@
         const imageElement = document.getElementById('image');
         const successMessage = document.getElementById('successMessage');
         const failMessage = document.getElementById('failMessage');
+        const buttonsContainer = document.querySelector('.buttons');
 
         // 图片资源（外链）
         const agreeImage = 'https://pic1.imgdb.cn/item/67baf477d0e0a243d4029017.gif'; // 同意时的图片
@@ -104,8 +106,9 @@
             successMessage.classList.remove('hidden');
             failMessage.classList.add('hidden');
 
-            // 隐藏“同意”按钮
+            // 隐藏两个按钮
             agreeButton.style.display = 'none';
+            disagreeButton.style.display = 'none';
         });
 
         // 不同意按钮点击事件
@@ -124,8 +127,8 @@
             agreeButton.style.transform = `scale(${agreeButtonScale})`;
 
             // 限制“同意”按钮的最大尺寸
-            const maxWidth = window.innerWidth * 0.8; // 最大宽度为屏幕宽度的 80%
-            const maxHeight = window.innerHeight * 0.8; // 最大高度为屏幕高度的 80%
+            const maxWidth = buttonsContainer.offsetWidth * 0.8; // 最大宽度为按钮容器宽度的 80%
+            const maxHeight = buttonsContainer.offsetHeight * 0.8; // 最大高度为按钮容器高度的 80%
             if (agreeButton.offsetWidth >= maxWidth || agreeButton.offsetHeight >= maxHeight) {
                 agreeButton.style.width = `${maxWidth}px`;
                 agreeButton.style.height = `${maxHeight}px`;
