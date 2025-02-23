@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可以成为我的恋人吗？</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #ff6b6b;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: opacity 0.5s ease;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        #agree {
+            background-color: #4caf50;
+            color: white;
+        }
+        #disagree {
+            background-color: #f44336;
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>可以成为我的恋人吗？</h1>
+    <img id="image" src="https://pic1.imgdb.cn/item/67baf4a8d0e0a243d4029032.gif" alt="表情包">
+    <div class="buttons">
+        <button id="agree">同意</button>
+        <button id="disagree">不同意</button>
+    </div>
+    <div id="successMessage" class="message hidden">❤️ 太棒了！我们在一起吧！ ❤️</div>
+    <div id="failMessage" class="message hidden">😢 再考虑一下嘛~ 😢</div>
+
+    <script>
+        const agreeButton = document.getElementById('agree');
+        const disagreeButton = document.getElementById('disagree');
+        const imageElement = document.getElementById('image');
+        const successMessage = document.getElementById('successMessage');
+        const failMessage = document.getElementById('failMessage');
+
+        // 图片资源（外链）
+        const agreeImage = 'https://pic1.imgdb.cn/item/67baf477d0e0a243d4029017.gif'; // 同意时的图片
+        const disagreeImages = [
+            'https://pic1.imgdb.cn/item/67baf4aed0e0a243d4029035.gif',
+            'https://pic1.imgdb.cn/item/67baf4b4d0e0a243d4029038.gif',
+            'https://pic1.imgdb.cn/item/67baf50cd0e0a243d4029063.gif',
+            'https://pic1.imgdb.cn/item/67baf50cd0e0a243d4029064.gif',
+            'https://pic1.imgdb.cn/item/67baf50dd0e0a243d4029065.gif',
+            'https://pic1.imgdb.cn/item/67baf5ced0e0a243d4029093.gif',
+            'https://pic1.imgdb.cn/item/67baf5cfd0e0a243d4029095.gif',
+            'https://pic1.imgdb.cn/item/67baf5cfd0e0a243d4029096.gif'
+        ]; // 不同意时的图片
+
+        // 同意按钮点击事件
+        agreeButton.addEventListener('click', () => {
+            imageElement.src = agreeImage;
+            imageElement.style.opacity = 0;
+            setTimeout(() => {
+                imageElement.style.opacity = 1;
+            }, 100);
+            agreeButton.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                agreeButton.style.transform = 'scale(1)';
+            }, 200);
+            successMessage.classList.remove('hidden');
+            failMessage.classList.add('hidden');
+        });
+
+        // 不同意按钮点击事件
+        disagreeButton.addEventListener('click', () => {
+            const randomImage = disagreeImages[Math.floor(Math.random() * disagreeImages.length)];
+            imageElement.src = randomImage;
+            imageElement.style.opacity = 0;
+            setTimeout(() => {
+                imageElement.style.opacity = 1;
+            }, 100);
+            disagreeButton.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                disagreeButton.style.transform = 'scale(1)';
+            }, 200);
+            failMessage.classList.remove('hidden');
+            successMessage.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
